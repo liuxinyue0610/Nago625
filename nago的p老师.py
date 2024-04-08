@@ -1,21 +1,21 @@
 def encrypt(text, shift):
-    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    encrypted_text = ''
-    for char in text:
-        if char.isalpha():
-            index = (alphabet.index(char.upper()) + shift) % 26
-            encrypted_text += alphabet[index]
-    return encrypted_text
+     alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+     encrypted_text = ''
+     for char in text:
+          if char.isalpha():
+              index = (alphabet.index(char.upper()) + shift) % 26
+              encrypted_text += alphabet[index]
+     return encrypted_text
 
 
 def decrypt(encrypted_text, shift):
-    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    decrypted_text = ''
-    for char in encrypted_text:
+     alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+     decrypted_text = ''
+     for char in encrypted_text:
         if char.isalpha():
             index = (alphabet.index(char.upper()) - shift) % 26
             decrypted_text += alphabet[index]
-    return decrypted_text
+     return decrypted_text
 
 
 def format_text(text):
@@ -30,11 +30,14 @@ def main():
     with open(input_file, 'r') as file:
         text = file.read()
 
-    # Remove non-letter characters and format the text
     text = format_text(text)
 
-    # Prompt user for the shift amount
-    shift = int(input("Enter the shift amount: "))
+    while True:
+        try:
+            shift = int(input("Enter the shift amount: (an integer)"))
+            break  # Exit the loop if input is valid
+        except ValueError:
+            print("Please enter a valid integer.")
 
     # Encrypt the text
     encrypted_text = encrypt(text, shift)
