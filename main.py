@@ -21,3 +21,21 @@ def main():
     if args.shift is None:
         print("Please provide a shift value using --shift")
         return
+    
+    try:
+        with open('original.txt', 'r') as file:
+            original_text = file.read().strip() 
+    except FileNotFoundError:
+            print("Error: original.txt file not found")
+            return
+
+    original_text = original_text
+    cipher_text = shift_cipher(original_text, args.shift)
+    decipher_text = shift_cipher(cipher_text, 26 - args.shift)
+    
+    print("Original text:", original_text)
+    print("Cipher text:", cipher_text)
+    print("Deciphered text:", decipher_text)
+
+if __name__ == '__main__':
+    main()
